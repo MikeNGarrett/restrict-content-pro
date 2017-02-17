@@ -529,7 +529,7 @@ class RCP_Payment_Gateway_Stripe extends RCP_Payment_Gateway {
 								$rcp_payments->insert( $payment_data );
 							}
 
-							do_action( 'rcp_stripe_charge_succeeded', $user, $payment_data );
+							do_action( 'rcp_stripe_charge_succeeded', $user, $payment_data, $event );
 
 							die( 'rcp_stripe_charge_succeeded action fired successfully' );
 
