@@ -883,7 +883,9 @@ function rcp_get_restricted_post_ids() {
 					'compare' => '!='
 				),
 				array(
-					'key' => 'rcp_access_level'
+					'key'     => 'rcp_access_level',
+					'value'   => 'None',
+					'compare' => '!='
 				)
 			)
 		) );
