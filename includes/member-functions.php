@@ -1255,6 +1255,8 @@ function rcp_maybe_disable_toolbar() {
 
 	if ( isset( $rcp_options['disable_toolbar'] ) && ! current_user_can( 'manage_options' ) ) {
 		add_filter( 'show_admin_bar', '__return_false' );
+		// Hide BuddyPress admin bar.
+		remove_action( 'init', 'bp_core_load_admin_bar', 9 );
 	}
 }
 add_action( 'init', 'rcp_maybe_disable_toolbar', 9999 );
