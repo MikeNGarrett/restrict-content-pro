@@ -302,9 +302,9 @@ class RCP_Registration {
 		}
 
 		// make sure the discount is not > 100%
-		if ( 0 > $total ) {
-			$total = 0;
-		}
+		// if ( 0 > $total ) {
+		// 	$total = 0;
+		// }
 
 		return apply_filters( 'rcp_registration_get_total_discounts', (float) ( $original_total - $total ), $original_total, $only_recurring, $this );
 
@@ -322,7 +322,8 @@ class RCP_Registration {
 	public function get_total( $discounts = true, $fees = true ) {
 
 		$total = rcp_get_subscription_price( $this->subscription );
-
+		// Used for tracking discount above total subscription price.
+		$leftover = 0;
 		if ( $fees ) {
 			$total += $this->get_proration_credits();
 		}
@@ -332,6 +333,8 @@ class RCP_Registration {
 		}
 
 		if ( 0 > $total ) {
+			// Take the additional above the subscription and save it for later.
+			$leftover = $total * -1;
 			$total = 0;
 		}
 
@@ -339,6 +342,10 @@ class RCP_Registration {
 			$total += $this->get_signup_fees( $total );
 		}
 
+		// If the total is above 0 and there's leftover, use it.
+		if ( 0 < $total && 0 < $leftover ) {
+			$total -= $leftover;
+		}
 		if ( 0 > $total ) {
 			$total = 0;
 		}

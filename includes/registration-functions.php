@@ -709,7 +709,9 @@ function rcp_registration_total( $echo = true ) {
 	$trial_duration_unit = $rcp_levels_db->trial_duration_unit( $level->id );
 
 	if ( ! empty( $trial_duration ) && ! rcp_has_used_trial() ) {
+		$total_price = $total;
 		$total = sprintf( __( 'Free trial - %s', 'rcp' ), $trial_duration . ' ' .  rcp_filter_duration_unit( $trial_duration_unit, $trial_duration ) );
+		$total .= ', ' . $total_price . ' due after trial period.';
 	}
 
 	$total = apply_filters( 'rcp_registration_total', $total );

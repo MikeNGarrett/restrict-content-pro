@@ -40,14 +40,6 @@ if ( ! rcp_is_registration() ) {
 					<th colspan="2"><?php _e( 'Discounts and Fees', 'rcp' ); ?></th>
 				</tr>
 
-				<?php // Discounts ?>
-				<?php if ( rcp_get_registration()->get_discounts() ) : foreach( rcp_get_registration()->get_discounts() as $code => $recuring ) : if ( ! $discount = rcp_get_discount_details_by_code( $code ) ) continue; ?>
-					<tr class="rcp-discount">
-						<td data-th="<?php esc_attr_e( 'Discount', 'rcp' ); ?>"><?php echo esc_html( $discount->name ); ?></td>
-						<td data-th="<?php esc_attr_e( 'Discount Amount', 'rcp' ); ?>"><?php echo esc_html( rcp_discount_sign_filter( $discount->amount, $discount->unit ) ); ?></td>
-					</tr>
-				<?php endforeach; endif; ?>
-
 				<?php // Fees ?>
 				<?php if ( rcp_get_registration()->get_fees() ) : foreach( rcp_get_registration()->get_fees() as $fee ) :
 
@@ -58,6 +50,14 @@ if ( ! rcp_is_registration() ) {
 					<tr class="rcp-fee">
 						<td data-th="<?php esc_attr_e( 'Fee', 'rcp' ); ?>"><?php echo esc_html( $fee['description'] ); ?></td>
 						<td data-th="<?php esc_attr_e( 'Fee Amount', 'rcp' ); ?>"><?php echo esc_html( $sign . rcp_currency_filter( $fee['amount'] ) ); ?></td>
+					</tr>
+				<?php endforeach; endif; ?>
+
+				<?php // Discounts ?>
+				<?php if ( rcp_get_registration()->get_discounts() ) : foreach( rcp_get_registration()->get_discounts() as $code => $recuring ) : if ( ! $discount = rcp_get_discount_details_by_code( $code ) ) continue; ?>
+					<tr class="rcp-discount">
+						<td data-th="<?php esc_attr_e( 'Discount', 'rcp' ); ?>"><?php echo esc_html( $discount->name ); ?></td>
+						<td data-th="<?php esc_attr_e( 'Discount Amount', 'rcp' ); ?>"><?php echo esc_html( rcp_discount_sign_filter( $discount->amount, $discount->unit ) ); ?></td>
 					</tr>
 				<?php endforeach; endif; ?>
 
